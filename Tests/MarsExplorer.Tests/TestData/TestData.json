@@ -1,0 +1,41 @@
+﻿{
+  "coordinates": {
+    "cols": 5,
+    "rows": 3
+  },
+  "instructions": [
+    {
+      "input": {
+        "robotInitialPosition": {
+          "X": 1,
+          "Y": 1,
+          "orientation": "E"
+        },
+        "commands": "RFRFRFRF"
+      },
+      "expectedOutput": "1 1 E"
+    },
+    {
+      "input": {
+        "robotInitialPosition": {
+          "X": 3,
+          "Y": 2,
+          "orientation": "N"
+        },
+        "commands": "FRRFLLFFRRFLL"
+      },
+      "expectedOutput": "3 3 N LOST"
+    },
+    {
+      "input": {
+        "robotInitialPosition": {
+          "X": 0,
+          "Y": 3,
+          "orientation": "W"
+        },
+        "commands": "LLFFFLFLFL"
+      },
+      "expectedOutput": "3 3 N LOST"
+    }
+  ]
+}
