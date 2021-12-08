@@ -12,7 +12,7 @@ namespace MarsExplorer
         {
             using var host = CreateHostBuilder(args).Build();
 
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Please run the RobotInstructionCommandHandlerTests for testing, thanks.");
 
             return host.RunAsync();
         }
