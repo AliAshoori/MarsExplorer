@@ -43,7 +43,7 @@ Visual Studio 2019
 .NET 5
 
 ## Unit Tests
-Almost done around the main functions and domain classes. `TestData.json` contains a nice `json` structure for test data where we can add/modify to see different results against `RobotInstructionCommandHandler`.
+Almost done around the main functions and domain classes. [`TestData.json`](https://github.com/AliAshoori/MarsExplorer/blob/master/Tests/MarsExplorer.Tests/TestData/TestData.json) contains a nice `json` structure for test data where we can add/modify to see different results against `RobotInstructionCommandHandler`.
 A walkthrough against one of these test cases - intials (0, 3) WEST and Mars (5, 3)
 
 <p>
