@@ -1,29 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using MarsExplorer.Utils;
 
 namespace MarsExplorer.Model
 {
-    public class MarsPlanet
+    public sealed class MarsPlanet
     {
-        public MarsPlanet(MarsCoordinates coordinates)
-        {
-            Coordinates = coordinates.NotNull();
-            CoordinatesWithScent = new List<Coordinates>();
-        }
+        private static readonly Lazy<MarsPlanet> Lazy = new(() => new MarsPlanet());
 
-        public IList<Coordinates> CoordinatesWithScent { get; set; }
+        public static MarsPlanet Instance => Lazy.Value;
 
-        public MarsCoordinates Coordinates { get; }
-        
+        public IList<MarsPlanetDeadZone> ScentSpots { get; set; } = new List<MarsPlanetDeadZone>();
+
+        public MarsCoordinates Coordinates { get; set; }
+
         public bool IsDeadZone(Coordinates targetPosition)
         {
             return Coordinates.IsDeadZone(targetPosition);
         }
 
-        public bool IsPositionScented(Coordinates targetCoordinates)
+        public bool IsPositionScented(Coordinates targetCoordinates, Orientation orientation)
         {
-            return CoordinatesWithScent.Any((pos => pos.EqualsWith(targetCoordinates)));
+            return ScentSpots.Any(spot => spot.Coordinates.EqualsWith(targetCoordinates) &&
+                                          spot.Orientation == orientation);
+        }
+
+        public class MarsPlanetDeadZone
+        {
+            public Orientation Orientation { get; set; }
+
+            public Coordinates Coordinates { get; set; }
         }
     }
 }

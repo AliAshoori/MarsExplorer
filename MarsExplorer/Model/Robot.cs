@@ -51,14 +51,19 @@ namespace MarsExplorer.Model
                 _ => throw new InvalidOperationException($"Invalid Orientation found: {Position.Orientation}")
             };
 
-            if (MarsPlanet.IsPositionScented(targetCoordinates))
+            if (MarsPlanet.IsPositionScented(Position.Coordinates, Position.Orientation))
             {
                 return;
             }
 
             if (MarsPlanet.IsDeadZone(targetCoordinates))
             {
-                MarsPlanet.CoordinatesWithScent.Add(Position.Coordinates);
+                MarsPlanet.ScentSpots.Add(new MarsPlanet.MarsPlanetDeadZone
+                {
+                    Coordinates = Position.Coordinates,
+                    Orientation = Position.Orientation
+                });
+
                 HasLost = true;
 
                 return;

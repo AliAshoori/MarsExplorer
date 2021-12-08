@@ -18,6 +18,9 @@ namespace MarsExplorer.Tests
         public void BuildInstructions_WithValidInstructionTypes_ReturnsAllInstances()
         {
             // Arrange
+            var mars = MarsPlanet.Instance;
+            mars.Coordinates = new MarsCoordinates(6, 6);
+
             var command = new RobotInstructionCommand(
                 new RobotPosition
                 {
@@ -29,7 +32,7 @@ namespace MarsExplorer.Tests
                     }
                 },
                 "LRFLRF",
-                new MarsPlanet(new MarsCoordinates(6, 6)));
+                mars);
 
             // Act
             var instructions = command.BuildInstructions().ToArray();
@@ -45,6 +48,9 @@ namespace MarsExplorer.Tests
         public void BuildInstructions_WithInValidInstructionTypes_ThrowsException()
         {
             // Arrange
+            var mars = MarsPlanet.Instance;
+            mars.Coordinates = new MarsCoordinates(6, 6);
+
             var command = new RobotInstructionCommand(
                 new RobotPosition
                 {
@@ -56,7 +62,7 @@ namespace MarsExplorer.Tests
                     }
                 },
                 "LRFLRFX",
-                new MarsPlanet(new MarsCoordinates(6, 6)));
+                mars);
 
             // Act
             Action instructions = () => command.BuildInstructions();
@@ -82,14 +88,15 @@ namespace MarsExplorer.Tests
                 }
             };
 
-            var marsPlanet = new MarsPlanet(new MarsCoordinates(6, 6));
+            var mars = MarsPlanet.Instance;
+            mars.Coordinates = new MarsCoordinates(6, 6);
 
             // Act
             Action init = () =>
                 new RobotInstructionCommand(
                     robotPosition,
                     instructionSeries,
-                    marsPlanet);
+                    mars);
 
             // Assert
             init.Should().ThrowExactly<ArgumentNullException>(nameof(instructionSeries));
@@ -128,14 +135,15 @@ namespace MarsExplorer.Tests
             // Arrange
             RobotPosition position = null;
 
-            var marsPlanet = new MarsPlanet(new MarsCoordinates(6, 6));
+            var mars = MarsPlanet.Instance;
+            mars.Coordinates = new MarsCoordinates(6, 6);
 
             // Act
             Action init = () =>
                 new RobotInstructionCommand(
                     position,
                     "LFLR",
-                    marsPlanet);
+                    mars);
 
             // Assert
             init.Should().ThrowExactly<ArgumentNullException>(nameof(position));

@@ -26,6 +26,9 @@ namespace MarsExplorer.Tests
             var instructionResults = new StringBuilder();
             var expected = new StringBuilder();
 
+            var mars = MarsPlanet.Instance;
+            mars.Coordinates = new MarsCoordinates(testData.MarsCoordinates.Cols, testData.MarsCoordinates.Rows);
+
             foreach (var data in testData.Instructions)
             {
                 var robotPosition = new RobotPosition
@@ -37,9 +40,6 @@ namespace MarsExplorer.Tests
                         Y = data.Input.RobotInitialPosition.Y
                     }
                 };
-
-                var mars = new MarsPlanet(
-                    new MarsCoordinates(testData.MarsCoordinates.Cols, testData.MarsCoordinates.Rows));
 
                 // populate commands
                 commands.Add(new RobotInstructionCommand(robotPosition, data.Input.InstructionSeries, mars));

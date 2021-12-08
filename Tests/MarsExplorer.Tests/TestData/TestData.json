@@ -35,7 +35,7 @@
         },
         "commands": "LLFFFLFLFL"
       },
-      "expectedOutput": "3 3 N LOST"
+      "expectedOutput": "2 3 S"
     }
   ]
 }
