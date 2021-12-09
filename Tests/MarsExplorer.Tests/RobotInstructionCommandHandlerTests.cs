@@ -33,7 +33,7 @@ namespace MarsExplorer.Tests
             {
                 var robotPosition = new RobotPosition
                 {
-                    Orientation = data.Input.RobotInitialPosition.Orientation.ToOrientation(),
+                    Orientation = data.Input.RobotInitialPosition.Orientation.InstantiateOrientation(),
                     Coordinates = new Coordinates
                     {
                         X = data.Input.RobotInitialPosition.X,

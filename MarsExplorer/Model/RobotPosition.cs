@@ -4,13 +4,13 @@ namespace MarsExplorer.Model
 {
     public class RobotPosition
     {
-        public Orientation Orientation { get; set; }
+        public BaseOrientation Orientation { get; set; }
 
         public Coordinates Coordinates { get; set; }
 
         public override string ToString()
         {
-            return $"{Coordinates.X} {Coordinates.Y} {Orientation.GetDisplayName()}";
+            return $"{Coordinates.X} {Coordinates.Y} {Orientation.OrientationType.GetDisplayName()}";
         }
     }
 }

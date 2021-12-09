@@ -19,15 +19,15 @@ namespace MarsExplorer.Model
             return Coordinates.IsDeadZone(targetPosition);
         }
 
-        public bool IsPositionScented(Coordinates targetCoordinates, Orientation orientation)
+        public bool IsPositionScented(Coordinates targetCoordinates, OrientationType orientationType)
         {
             return ScentSpots.Any(spot => spot.Coordinates.EqualsWith(targetCoordinates) &&
-                                          spot.Orientation == orientation);
+                                          spot.OrientationType == orientationType);
         }
 
         public class MarsPlanetDeadZone
         {
-            public Orientation Orientation { get; set; }
+            public OrientationType OrientationType { get; set; }
 
             public Coordinates Coordinates { get; set; }
         }

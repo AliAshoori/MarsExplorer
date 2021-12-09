@@ -1,5 +1,4 @@
-﻿using System;
-using MarsExplorer.Utils;
+﻿using MarsExplorer.Utils;
 
 namespace MarsExplorer.Model
 {
@@ -18,50 +17,29 @@ namespace MarsExplorer.Model
 
         public void RotateToLeft()
         {
-            Position.Orientation = Position.Orientation switch
-            {
-                Orientation.East => Orientation.North,
-                Orientation.North => Orientation.West,
-                Orientation.West => Orientation.South,
-                Orientation.South => Orientation.East,
-                _ => throw new InvalidOperationException()
-            };
+            Position.Orientation = Position.Orientation.GetLeftOrientation();
         }
 
         public void RotateToRight()
         {
-            Position.Orientation = Position.Orientation switch
-            {
-                Orientation.East => Orientation.South,
-                Orientation.North => Orientation.East,
-                Orientation.West => Orientation.North,
-                Orientation.South => Orientation.West,
-                _ => throw new InvalidOperationException()
-            };
+            Position.Orientation = Position.Orientation.GetRightOrientation();
         }
 
         public void MoveForward()
         {
-            var targetCoordinates = Position.Orientation switch
-            {
-                Orientation.East => new Coordinates { X = Position.Coordinates.X + 1, Y = Position.Coordinates.Y },
-                Orientation.North => new Coordinates { X = Position.Coordinates.X, Y = Position.Coordinates.Y + 1 },
-                Orientation.South => new Coordinates { X = Position.Coordinates.X, Y = Position.Coordinates.Y - 1 },
-                Orientation.West => new Coordinates { X = Position.Coordinates.X - 1, Y = Position.Coordinates.Y },
-                _ => throw new InvalidOperationException($"Invalid Orientation found: {Position.Orientation}")
-            };
-
-            if (MarsPlanet.IsPositionScented(Position.Coordinates, Position.Orientation))
+            if (MarsPlanet.IsPositionScented(Position.Coordinates, Position.Orientation.OrientationType))
             {
                 return;
             }
+
+            var targetCoordinates = Position.Orientation.CalculateNextMove(Position.Coordinates);
 
             if (MarsPlanet.IsDeadZone(targetCoordinates))
             {
                 MarsPlanet.ScentSpots.Add(new MarsPlanet.MarsPlanetDeadZone
                 {
                     Coordinates = Position.Coordinates,
-                    Orientation = Position.Orientation
+                    OrientationType = Position.Orientation.OrientationType
                 });
 
                 HasLost = true;

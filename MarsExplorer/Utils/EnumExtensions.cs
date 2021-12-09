@@ -16,14 +16,14 @@ namespace MarsExplorer.Utils
                             .Name;
         }
 
-        public static Orientation ToOrientation(this string value)
+        public static BaseOrientation InstantiateOrientation(this string value)
         {
             return value switch
             {
-                "E" => Orientation.East,
-                "W" => Orientation.West,
-                "N" => Orientation.North,
-                "S" => Orientation.South,
+                "E" => new EastOrientation(),
+                "W" => new WestOrientation(),
+                "N" => new NorthOrientation(),
+                "S" => new SouthOrientation(),
                 _ => throw new InvalidOperationException($"Invalid Orientation: {value}")
             };
         }

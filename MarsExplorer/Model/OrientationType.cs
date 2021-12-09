@@ -2,7 +2,7 @@
 
 namespace MarsExplorer.Model
 {
-    public enum Orientation
+    public enum OrientationType
     {
         [Display(Name = "N", Description = "North")]
         North = 1,
