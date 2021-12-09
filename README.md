@@ -1,5 +1,5 @@
 # MarsExplorer
-One of those good challenges that cover a few practical programming concepts such as OOP, SOLID, Unit Testing, and some algorithmic thinking too. Give it a go and let's see how else you might solve it :) 
+A fun exercise...
 
 ## The Problem
 The surface of Mars can be modelled by a rectangular grid around which robots are able to
