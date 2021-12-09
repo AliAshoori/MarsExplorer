@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using MarsExplorer.Commands;
+using MarsExplorer.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -21,7 +22,15 @@ namespace MarsExplorer
         {
             return Host.CreateDefaultBuilder(args)
                 .ConfigureServices((_, services) =>
-                    services.AddScoped<ICommandHandler<RobotInstructionCommand, string>, RobotInstructionCommandHandler>());
+                {
+                    services
+                        .AddScoped<ICommandHandler<RobotInstructionCommand, string>, RobotInstructionCommandHandler>();
+
+                    services.AddScoped<IInstructionServicesCreator, InstructionServicesCreator>();
+                    services.AddScoped<IInstructionServiceCreator, MoveForwardInstructionServiceCreator>();
+                    services.AddScoped<IInstructionServiceCreator, RotateRightInstructionServiceCreator>();
+                    services.AddScoped<IInstructionServiceCreator, RotateLeftInstructionServiceCreator>();
+                });
         }
     }
 }

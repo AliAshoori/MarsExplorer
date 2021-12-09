@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MarsExplorer.Model;
 using MarsExplorer.Services;
 using MarsExplorer.Utils;
@@ -23,31 +24,7 @@ namespace MarsExplorer.Commands
         public MarsPlanet MarsPlanet { get; }
 
         public string InstructionSeries { get; }
-
-
-        public IEnumerable<BaseInstructionService> BuildInstructions()
-        {
-            var instructions = new List<BaseInstructionService>();
-
-            foreach (var singleInstruction in InstructionSeries)
-            {
-                switch (singleInstruction)
-                {
-                    case InstructionTypeConstants.LEFT:
-                        instructions.Add(new RotateLeftInstructionService());
-                        break;
-                    case InstructionTypeConstants.RIGHT:
-                        instructions.Add(new RotateRightInstructionService());
-                        break;
-                    case InstructionTypeConstants.FORWARD:
-                        instructions.Add(new MoveForwardInstructionService());
-                        break;
-                    default:
-                        throw new InvalidOperationException($"Invalid instruction detected: {singleInstruction}");
-                }
-            }
-
-            return instructions;
-        }
     }
+
+    
 }

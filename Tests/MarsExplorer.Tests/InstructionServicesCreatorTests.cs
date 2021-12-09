@@ -1,54 +1,40 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Text;
+using System.Linq;
 using FluentAssertions;
 using MarsExplorer.Commands;
 using MarsExplorer.Model;
 using MarsExplorer.Services;
-using MarsExplorer.Tests.TestData;
-using MarsExplorer.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Newtonsoft.Json;
 
 namespace MarsExplorer.Tests
 {
-    [TestCategory("MarsExplorer.CommandHandlers")]
+    [TestCategory("MarsExplorer.Services")]
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class RobotInstructionCommandHandlerTests
+    public class InstructionServicesCreatorTests
     {
         [TestMethod]
-        public void Handle_VariousCommands_ReturnsLatestRobotStatus()
+        public void Create_WithValidInstructionTypes_ReturnsAllInstances()
         {
             // Arrange
-            var testData = JsonConvert.DeserializeObject<InstructionsTestData>(File.ReadAllText("TestData\\TestData.json"));
-            var commands = new List<RobotInstructionCommand>();
-            var instructionResults = new StringBuilder();
-            var expected = new StringBuilder();
-
             var mars = MarsPlanet.Instance;
-            mars.Coordinates = new MarsCoordinates(testData.MarsCoordinates.Cols, testData.MarsCoordinates.Rows);
+            mars.Coordinates = new MarsCoordinates(6, 6);
 
-            foreach (var data in testData.Instructions)
-            {
-                var robotPosition = new RobotPosition
+            var command = new RobotInstructionCommand(
+                new RobotPosition
                 {
-                    Orientation = data.Input.RobotInitialPosition.Orientation.InstantiateOrientation(),
+                    Orientation = new EastOrientation(),
                     Coordinates = new Coordinates
                     {
-                        X = data.Input.RobotInitialPosition.X,
-                        Y = data.Input.RobotInitialPosition.Y
+                        X = 3,
+                        Y = 5
                     }
-                };
-
-                // populate commands
-                commands.Add(new RobotInstructionCommand(robotPosition, data.Input.InstructionSeries, mars));
-
-                // populate expected outputs
-                expected.AppendLine(data.ExpectedOutput);
-            }
+                },
+                "LRFLRF",
+                mars);
 
             var mockMoveForwardInstruction = new Mock<IInstructionServiceCreator>();
             mockMoveForwardInstruction.Setup(m => m.IsMatch("F")).Returns(true);
@@ -71,13 +57,27 @@ namespace MarsExplorer.Tests
 
             var servicesCreator = new InstructionServicesCreator(instructionCreators);
 
-            var handler = new RobotInstructionCommandHandler(servicesCreator);
-
             // Act
-            commands.ForEach(c => instructionResults.AppendLine(handler.Handle(c)));
+            var instructions = servicesCreator.CreateFromCommands(command.InstructionSeries).ToArray();
 
             // Assert
-            instructionResults.ToString().Should().BeEquivalentTo(expected.ToString());
+            instructions.Should().HaveCount(6);
+            instructions.OfType<MoveForwardInstructionService>().Should().HaveCount(2);
+            instructions.OfType<RotateRightInstructionService>().Should().HaveCount(2);
+            instructions.OfType<RotateLeftInstructionService>().Should().HaveCount(2);
+        }
+
+        [TestMethod]
+        public void InstructionServicesCreator_WithNullArg_ThrowsArgNullException()
+        {
+            // Arrange
+            IEnumerable<IInstructionServiceCreator> serviceCreators = null;
+
+            // Act
+            Action init = () => new InstructionServicesCreator(serviceCreators);
+
+            // Assert
+            init.Should().ThrowExactly<ArgumentNullException>(nameof(serviceCreators));
         }
     }
 }
