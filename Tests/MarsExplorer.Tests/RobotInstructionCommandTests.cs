@@ -21,7 +21,7 @@ namespace MarsExplorer.Tests
             // Arrange
             var robotPosition = new RobotPosition
             {
-                Orientation = new EastOrientation(),
+                Orientation = EastOrientation.Instance,
                 Coordinates = new Coordinates
                 {
                     X = 3,
@@ -49,7 +49,7 @@ namespace MarsExplorer.Tests
             // Arrange
             var robotPosition = new RobotPosition
             {
-                Orientation = new EastOrientation(),
+                Orientation = EastOrientation.Instance,
                 Coordinates = new Coordinates
                 {
                     X = 3,

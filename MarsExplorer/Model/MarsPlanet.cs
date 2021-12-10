@@ -6,6 +6,11 @@ namespace MarsExplorer.Model
 {
     public sealed class MarsPlanet
     {
+        private MarsPlanet()
+        {
+
+        }
+
         private static readonly Lazy<MarsPlanet> Lazy = new(() => new MarsPlanet());
 
         public static MarsPlanet Instance => Lazy.Value;

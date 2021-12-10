@@ -11,7 +11,8 @@ namespace MarsExplorer.Utils
         public static string GetDisplayName(this Enum enumValue)
         {
             return enumValue.GetType()
-                            .GetMember(enumValue.ToString())?.First()?
+                            .GetMember(enumValue.ToString())
+                            .First()
                             .GetCustomAttribute<DisplayAttribute>()?
                             .Name;
         }
@@ -20,10 +21,10 @@ namespace MarsExplorer.Utils
         {
             return value switch
             {
-                "E" => new EastOrientation(),
-                "W" => new WestOrientation(),
-                "N" => new NorthOrientation(),
-                "S" => new SouthOrientation(),
+                "E" => EastOrientation.Instance,
+                "W" => WestOrientation.Instance,
+                "N" => NorthOrientation.Instance,
+                "S" => SouthOrientation.Instance,
                 _ => throw new InvalidOperationException($"Invalid Orientation: {value}")
             };
         }

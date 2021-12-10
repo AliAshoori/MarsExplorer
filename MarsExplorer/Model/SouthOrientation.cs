@@ -1,8 +1,14 @@
-﻿namespace MarsExplorer.Model
+﻿using System;
+
+namespace MarsExplorer.Model
 {
-    public class SouthOrientation : BaseOrientation
+    public sealed class SouthOrientation : BaseOrientation
     {
-        public SouthOrientation()
+        private static readonly Lazy<SouthOrientation> Lazy = new(() => new SouthOrientation());
+
+        public static SouthOrientation Instance => Lazy.Value;
+
+        private SouthOrientation()
         {
             OrientationType = OrientationType.South;
         }
@@ -14,12 +20,12 @@
 
         public override BaseOrientation GetLeftOrientation()
         {
-            return new EastOrientation();
+            return EastOrientation.Instance;
         }
 
         public override BaseOrientation GetRightOrientation()
         {
-            return new WestOrientation();
+            return WestOrientation.Instance;
         }
     }
 }

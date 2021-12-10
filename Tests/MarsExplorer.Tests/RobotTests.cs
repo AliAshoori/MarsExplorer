@@ -30,7 +30,7 @@ namespace MarsExplorer.Tests
                         X = 1,
                         Y = 1
                     },
-                    Orientation = new SouthOrientation()
+                    Orientation = SouthOrientation.Instance
                 }
             };
 
@@ -57,7 +57,7 @@ namespace MarsExplorer.Tests
                         X = 1,
                         Y = 1
                     },
-                    Orientation = new WestOrientation()
+                    Orientation = WestOrientation.Instance
                 }
             };
 
@@ -84,7 +84,7 @@ namespace MarsExplorer.Tests
                         X = 1,
                         Y = 1
                     },
-                    Orientation = new NorthOrientation()
+                    Orientation = NorthOrientation.Instance
                 }
             };
 
@@ -111,7 +111,7 @@ namespace MarsExplorer.Tests
                         X = 1,
                         Y = 1
                     },
-                    Orientation = new EastOrientation()
+                    Orientation = EastOrientation.Instance
                 }
             };
 
@@ -142,7 +142,7 @@ namespace MarsExplorer.Tests
                         X = 1,
                         Y = 1
                     },
-                    Orientation = new SouthOrientation()
+                    Orientation = SouthOrientation.Instance
                 }
             };
 
@@ -169,7 +169,7 @@ namespace MarsExplorer.Tests
                         X = 1,
                         Y = 1
                     },
-                    Orientation = new WestOrientation()
+                    Orientation = WestOrientation.Instance
                 }
             };
 
@@ -196,7 +196,7 @@ namespace MarsExplorer.Tests
                         X = 1,
                         Y = 1
                     },
-                    Orientation = new NorthOrientation()
+                    Orientation = NorthOrientation.Instance
                 }
             };
 
@@ -223,7 +223,7 @@ namespace MarsExplorer.Tests
                         X = 1,
                         Y = 1
                     },
-                    Orientation = new EastOrientation()
+                    Orientation = EastOrientation.Instance
                 }
             };
 
@@ -254,7 +254,7 @@ namespace MarsExplorer.Tests
                         X = 1,
                         Y = 1
                     },
-                    Orientation = new NorthOrientation()
+                    Orientation = NorthOrientation.Instance
                 }
             };
 
@@ -287,7 +287,7 @@ namespace MarsExplorer.Tests
                         X = 1,
                         Y = 1
                     },
-                    Orientation = new EastOrientation()
+                    Orientation = EastOrientation.Instance
                 }
             };
 
@@ -320,7 +320,7 @@ namespace MarsExplorer.Tests
                         X = 1,
                         Y = 1
                     },
-                    Orientation = new SouthOrientation()
+                    Orientation = SouthOrientation.Instance
                 }
             };
 
@@ -353,7 +353,7 @@ namespace MarsExplorer.Tests
                         X = 1,
                         Y = 1
                     },
-                    Orientation = new EastOrientation()
+                    Orientation = EastOrientation.Instance
                 }
             };
 
@@ -398,7 +398,7 @@ namespace MarsExplorer.Tests
                         X = 3,
                         Y = 4
                     },
-                    Orientation = new NorthOrientation()
+                    Orientation = NorthOrientation.Instance
                 }
             };
 
@@ -447,7 +447,7 @@ namespace MarsExplorer.Tests
                         X = 4,
                         Y = 4
                     },
-                    Orientation = new NorthOrientation()
+                    Orientation = NorthOrientation.Instance
                 },
                 HasLost = true
             };
@@ -489,7 +489,7 @@ namespace MarsExplorer.Tests
                         X = 1,
                         Y = 1
                     },
-                    Orientation = new NorthOrientation()
+                    Orientation = NorthOrientation.Instance
                 }
             };
 
@@ -522,7 +522,7 @@ namespace MarsExplorer.Tests
                         X = 4,
                         Y = 4
                     },
-                    Orientation = new NorthOrientation()
+                    Orientation = NorthOrientation.Instance
                 }
             };
 

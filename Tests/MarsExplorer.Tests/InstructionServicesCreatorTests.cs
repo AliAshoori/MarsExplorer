@@ -26,7 +26,7 @@ namespace MarsExplorer.Tests
             var command = new RobotInstructionCommand(
                 new RobotPosition
                 {
-                    Orientation = new EastOrientation(),
+                    Orientation = EastOrientation.Instance,
                     Coordinates = new Coordinates
                     {
                         X = 3,
