@@ -1,5 +1,6 @@
 # MarsExplorer
 A fun exercise...
+In [MarsExplorer-2](https://github.com/AliAshoori/MarsExplorer-2) the program processes the robots in parallel
 
 ## The Problem
 The surface of Mars can be modelled by a rectangular grid around which robots are able to
